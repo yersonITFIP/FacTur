@@ -132,4 +132,32 @@ npm run web         # Versión web
 - El backend corre en `http://localhost:3000`
 - El frontend se conecta automáticamente al backend
 - JWT se guarda en AsyncStorage del dispositivo
-# FacTur
+
+## Schema de Base de Datos
+
+El archivo `backend/sql/schema.sql` contiene las tablas necesarias:
+
+```sql
+CREATE DATABASE factur_db;
+USE factur_db;
+
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE expenses (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  userId INT NOT NULL,
+  description VARCHAR(255),
+  amount DECIMAL(10,2) NOT NULL,
+  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (userId) REFERENCES users(id)
+);
+```
+
+## Autor
+
+Desarrollado por **yersonITFIP**
